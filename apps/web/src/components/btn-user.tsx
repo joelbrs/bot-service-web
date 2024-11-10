@@ -2,18 +2,15 @@ import {
   Button,
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@repo/ui/components";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, LogOut } from "lucide-react";
 // import { useNavigate } from "react-router-dom";
 
-type Props = {
-  account?: unknown;
-};
-
-export function BtnUser({ account }: Props): JSX.Element {
+export function BtnUser(): JSX.Element {
   // const navigate = useNavigate();
 
   return (
@@ -41,10 +38,10 @@ export function BtnUser({ account }: Props): JSX.Element {
         </p>
 
         <DropdownMenuSeparator className="mt-2" />
-        {/* <DropdownMenuItem onClick={() => onLogOut()} className="text-red-400">
+        <DropdownMenuItem className="text-red-400">
           <LogOut className="mr-2 h-4 w-4" />
           <span>Sair</span>
-        </DropdownMenuItem> */}
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

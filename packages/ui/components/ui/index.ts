@@ -11,3 +11,5 @@ export * from "./table";
 export * from "./alert-dialog";
 export * from "./dropdown-menu";
 export * from "./textarea";
+export * from './select'
+export * from './pagination'
