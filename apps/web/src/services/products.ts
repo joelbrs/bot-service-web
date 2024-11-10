@@ -8,3 +8,7 @@ const http = HttpFactory(baseUrl);
 export const getProducts = (params: object) => {
   return http.get<ResponsePagination<ProductDtoOut>>("", params);
 };
+
+export const postProduct = (params: object) => {
+  return http.post<ProductDtoOut>("", params);
+} 

@@ -5,6 +5,7 @@ import { SignUpPage } from "./pages/sign-up";
 import { NotFoundPage } from "./pages/not-found";
 import { ManterProdutos } from "./pages/produtos";
 import { Page } from "./layouts/page";
+import { CadastrarProduto } from "./pages/produtos/cadastrar";
 
 export const router = createBrowserRouter([
   {
@@ -23,11 +24,21 @@ export const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <Page title="Manter Produtos" description="Manutenção de produtos da sua loja"/>,
+    element: <Page title="Manter Produtos"/>,
     children: [
       {
         path: '/produtos',
         element: <ManterProdutos />
+      }
+    ]
+  },
+  {
+    path: '/',
+    element: <Page title="Novo Produto"/>,
+    children: [
+      {
+        path: '/produtos/cadastrar',
+        element: <CadastrarProduto />
       }
     ]
   },

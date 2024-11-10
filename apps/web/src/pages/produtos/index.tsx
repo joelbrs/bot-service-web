@@ -21,6 +21,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { BtnClean } from "../../components/btn-clean";
 import { BtnSearch } from "../../components/btn-search";
+import { BtnNew } from "../../components/btn-new";
 import { ProductsTable } from "./components";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -125,6 +126,7 @@ export const ManterProdutos = (): JSX.Element => {
       <section className="flex justify-end gap-2">
         <BtnClean onClick={() => onClean()} />
         <BtnSearch onClick={() => onSubmit()} />
+        <BtnNew onClick={() => onSubmit()} label="Novo Produto"/>
       </section>
       <section>
         <ProductsTable
