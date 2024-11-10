@@ -12,12 +12,7 @@ export function Header(): JSX.Element {
           <Pyramid className="w-4 h-4" />
           <Separator className="h-6" orientation="vertical" />
         </div>
-        <nav className="px-6 text-sm font-medium flex gap-3">
-          <Link to={{ pathname: "/dashboard" }}>
-            <span className="hover:underline hover:underline-offset-4 text-foreground">
-              Início
-            </span>
-          </Link>
+        <nav className="sm:px-6 px-2 text-sm font-medium flex sm:gap-3">
           <Link to={{ pathname: "/template" }}>
             <span className="hover:underline hover:underline-offset-4 text-foreground">
               Manter Templates

@@ -3,13 +3,18 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
 import { LoadingSpinner, ThemeProvider } from "./components";
 import { Toaster } from "@repo/ui/components";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Suspense fallback={<LoadingSpinner />}>
-        <RouterProvider router={router} />
-        <Toaster closeButton richColors />
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+          <Toaster closeButton richColors />
+        </QueryClientProvider>
       </Suspense>
     </ThemeProvider>
   );

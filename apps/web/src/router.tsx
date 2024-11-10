@@ -23,7 +23,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <Page title="Manter Produtos" />,
+    element: <Page title="Manter Produtos" description="Manutenção de produtos da sua loja"/>,
     children: [
       {
         path: '/produtos',
