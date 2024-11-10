@@ -22,11 +22,11 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '/produtos',
-    element: <Page />,
+    path: '/',
+    element: <Page title="Manter Produtos" />,
     children: [
       {
-        path: '/',
+        path: '/produtos',
         element: <ManterProdutos />
       }
     ]
