@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import { AuthPageLayout } from "./layouts/auth";
-import { PasswordSignInPage } from "./pages/sign-in/password-sign-in";
+import { PasswordSignInPage } from "./pages/sign-in";
 import { SignUpPage } from "./pages/sign-up";
 import { NotFoundPage } from "./pages/not-found";
+import { ManterProdutos } from "./pages/produtos";
+import { Page } from "./layouts/page";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +20,16 @@ export const router = createBrowserRouter([
         element: <PasswordSignInPage />,
       },
     ],
+  },
+  {
+    path: '/produtos',
+    element: <Page />,
+    children: [
+      {
+        path: '/',
+        element: <ManterProdutos />
+      }
+    ]
   },
   {
     path: "*",
