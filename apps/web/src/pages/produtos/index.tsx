@@ -1,18 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  FormControl,
-  FormField,
-  FormItem,
-  Input,
-  Label,
-  Form,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@repo/ui/components";
-import {
   ProductDtoOut,
   RequestPagination,
   ResponsePagination,
@@ -26,12 +13,13 @@ import { ProductsTable } from "./components";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ProductApi } from "../../services";
+import { ProductForm } from "./components/form";
 
 type SchemaType = z.infer<typeof schema>;
 
 const schema = z.object({
   name: z.string(),
-  status: z.enum(["DISPONIVEL", "INDISPONIVEL", ""]),
+  status: z.enum(["DISPONIVEL", "INDISPONIVEL"]),
 });
 
 export const ManterProdutos = (): JSX.Element => {
@@ -39,7 +27,7 @@ export const ManterProdutos = (): JSX.Element => {
     resolver: zodResolver(schema),
     defaultValues: {
       name: "",
-      status: "",
+      status: "DISPONIVEL",
     },
   });
 
@@ -76,57 +64,11 @@ export const ManterProdutos = (): JSX.Element => {
   };
 
   return (
-    <main className="space-y-5">
-      <Form {...form}>
-        <form
-          className="sm:grid sm:grid-cols-12 sm:gap-2 space-y-2 sm:space-y-0"
-          onSubmit={() => onSubmit()}
-        >
-          <section className="sm:col-span-10">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <Label htmlFor="name">Nome do Produto</Label>
-                  <FormControl>
-                    <Input id="name" placeholder="Nome do Produto" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </section>
-          <section className="sm:col-span-2">
-            <FormField
-              control={form.control}
-              name="status"
-              render={({ field }) => (
-                <FormItem>
-                  <Label htmlFor="status">Status</Label>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Status" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="DISPONIVEL">DISPONIVEL</SelectItem>
-                      <SelectItem value="INDISPONIVEL">INDISPONIVEL</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormItem>
-              )}
-            />
-          </section>
-        </form>
-      </Form>
+    <ProductForm form={form}>
       <section className="flex justify-end gap-2">
         <BtnClean onClick={() => onClean()} />
         <BtnSearch onClick={() => onSubmit()} />
-        <BtnNew onClick={() => onSubmit()} label="Novo Produto"/>
+        <BtnNew onClick={() => onSubmit()} label="Novo Produto" />
       </section>
       <section>
         <ProductsTable
@@ -135,6 +77,6 @@ export const ManterProdutos = (): JSX.Element => {
           onPaginate={onPaginate}
         />
       </section>
-    </main>
+    </ProductForm>
   );
 };
