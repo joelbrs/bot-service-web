@@ -6,14 +6,11 @@ import {
 } from "../../models";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { BtnClean } from "../../components/btn-clean";
-import { BtnSearch } from "../../components/btn-search";
-import { BtnNew } from "../../components/btn-new";
-import { ProductsTable } from "./components";
+import { BtnClean, BtnSearch, BtnNew } from "../../components";
+import { ProductsTable, ProductForm } from "./components";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ProductApi } from "../../services";
-import { ProductForm } from "./components/form";
 
 type SchemaType = z.infer<typeof schema>;
 

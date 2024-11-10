@@ -1,12 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { BtnClean } from "../../components/btn-clean";
-import { BtnSave } from "../../components/btn-save";
-import { ProductForm, SubProductForm } from "./components/form";
+import { BtnClean, BtnSave } from "../../components";
+import { ProductForm, SubProductForm, SubProductsTable } from "./components";
 import { useState } from "react";
 import { SubProductDtoOut } from "../../models";
-import { SubProductsTable } from "./components/sub-products-table";
 import { useMutation } from "@tanstack/react-query";
 import { ProductApi } from "../../services";
 

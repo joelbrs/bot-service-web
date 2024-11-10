@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@repo/ui/components";
 import { ProductDtoOut, RequestPagination } from "../../../models";
-import { PaginationComponent } from "../../../components/pagination";
+import { PaginationComponent } from "../../../components";
 
 type Props = {
   products?: ProductDtoOut[];

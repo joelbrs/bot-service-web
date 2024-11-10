@@ -1,7 +1,7 @@
 import { Button } from "@repo/ui/components";
 import { Search } from "lucide-react";
 
-export type Props = {
+type Props = {
   onClick?: () => void;
 };
 

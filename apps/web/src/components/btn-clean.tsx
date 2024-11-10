@@ -1,7 +1,7 @@
 import { Button } from "@repo/ui/components";
 import { Eraser } from "lucide-react";
 
-export type Props = {
+type Props = {
   onClick?: () => void;
 };
 

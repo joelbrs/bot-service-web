@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Header } from "../components/header";
-import { Footer } from "../components/footer";
+import { Header, Footer } from "../components";
 
 type Props = {
   title: string;

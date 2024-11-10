@@ -26,7 +26,7 @@ const moneyFormatter = Intl.NumberFormat("pt-BR", {
   maximumFractionDigits: 2,
 });
 
-export default function InputMoney(props: TextInputProps) {
+export function InputMoney(props: TextInputProps) {
   const initialValue = props.form.getValues()[props.name]
     ? moneyFormatter.format(props.form.getValues()[props.name])
     : "";
