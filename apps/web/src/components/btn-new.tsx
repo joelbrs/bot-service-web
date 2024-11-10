@@ -14,6 +14,7 @@ export const BtnNew = ({ label, onClick, type, className }: Props) => {
       onClick={onClick}
       className={`${className} "font-bold"`}
       type={type}
+      size="sm"
     >
       {label}
       <Plus className="w-5 h-5 ml-1" />
