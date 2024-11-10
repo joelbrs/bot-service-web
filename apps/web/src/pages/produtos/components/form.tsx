@@ -117,9 +117,9 @@ export const SubProductForm = ({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <Label htmlFor="name">Nome do Produto</Label>
+                  <Label htmlFor="name">Nome do Subproduto</Label>
                   <FormControl>
-                    <Input id="name" placeholder="Nome do Produto" {...field} />
+                    <Input id="name" placeholder="Nome do Subproduto" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -135,8 +135,8 @@ export const SubProductForm = ({
                   <FormControl>
                     <InputMoney
                       form={form}
-                      label="Preço do Produto"
-                      placeholder="Preço do Produto"
+                      label="Preço do Subproduto"
+                      placeholder="Preço do Subproduto"
                       {...field}
                     />
                   </FormControl>

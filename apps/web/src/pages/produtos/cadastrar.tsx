@@ -68,7 +68,7 @@ export const CadastrarProduto = (): JSX.Element => {
   return (
     <ProductForm form={form}>
       <section className="space-y-2">
-        <p className="text-muted-foreground pt-5">Dados dos SubProdutos</p>
+        <p className="text-muted-foreground pt-5">Dados dos Subprodutos</p>
         <SubProductForm form={formSubProduct} onSubmit={onAddSubProduct}>
           <SubProductsTable subProducts={subProducts} />
         </SubProductForm>

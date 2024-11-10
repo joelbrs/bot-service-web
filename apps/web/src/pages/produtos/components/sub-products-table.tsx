@@ -29,10 +29,10 @@ export const SubProductsTable = ({ subProducts }: Props): JSX.Element => {
           <TableHeader>
             <TableRow>
               <TableHead className="text-muted-foreground text-center font-medium">
-                Nome do Produto
+                Nome do Subproduto
               </TableHead>
               <TableHead className="text-muted-foreground text-center font-medium">
-                Preço do Produto
+                Preço do Subproduto
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -50,7 +50,7 @@ export const SubProductsTable = ({ subProducts }: Props): JSX.Element => {
             {!subProducts?.length && (
               <TableRow>
                 <TableCell colSpan={6} className="text-center font-medium">
-                  Nenhum produto adicionado.
+                  Nenhum subproduto adicionado.
                 </TableCell>
               </TableRow>
             )}
