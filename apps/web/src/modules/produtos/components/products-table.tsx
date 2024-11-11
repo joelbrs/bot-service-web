@@ -1,4 +1,5 @@
 import {
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -7,7 +8,9 @@ import {
   TableRow,
 } from "@repo/ui/components";
 import { ProductDtoOut, RequestPagination } from "../../../shared/models";
-import { PaginationComponent } from "../../../shared/components";
+import { PaginationComponent, TooltipContainer } from "../../../shared/components";
+import { Pencil, Trash } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   products?: ProductDtoOut[];
@@ -16,6 +19,14 @@ type Props = {
 };
 
 export const ProductsTable = ({ products, pagination, onPaginate }: Props): JSX.Element => {
+  const navigate = useNavigate()
+
+  const onEdit = () => {
+    navigate('/produtos/editar')
+  }
+
+  const onExclude = () => { }
+
   return (
     <>
       <section className="border rounded-md">
@@ -28,6 +39,9 @@ export const ProductsTable = ({ products, pagination, onPaginate }: Props): JSX.
               <TableHead className="text-muted-foreground text-center font-medium">
                 Status
               </TableHead>
+              <TableHead className="text-muted-foreground text-center font-medium">
+                Ações
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -38,6 +52,18 @@ export const ProductsTable = ({ products, pagination, onPaginate }: Props): JSX.
                 </TableCell>
                 <TableCell className="text-center font-medium">
                   {status}
+                </TableCell>
+                <TableCell className="text-center font-medium">
+                  <TooltipContainer label="Editar">
+                    <Button size="icon" variant="ghost" onClick={onEdit}>
+                      <Pencil className="h-4 w-4" />
+                    </Button>
+                  </TooltipContainer>
+                  <TooltipContainer label="Excluir">
+                    <Button size="icon" variant="ghost" onClick={onExclude}>
+                      <Trash className="h-4 w-4" />
+                    </Button>
+                  </TooltipContainer>
                 </TableCell>
               </TableRow>
             ))}
@@ -52,7 +78,7 @@ export const ProductsTable = ({ products, pagination, onPaginate }: Props): JSX.
         </Table>
       </section>
       <section className="mt-2">
-        <PaginationComponent pagination={pagination} onPaginate={onPaginate}/>
+        <PaginationComponent pagination={pagination} onPaginate={onPaginate} />
       </section>
     </>
   );
