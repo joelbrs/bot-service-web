@@ -1,6 +1,5 @@
-import { AxiosAdapter, HttpClient, HttpHandler } from "../infra";
+import { AxiosAdapter, HttpClient } from "../infra";
 
 export const HttpFactory = (baseUrl?: string): HttpClient => {
-  const adapter = new AxiosAdapter();
-  return new HttpHandler(adapter, baseUrl);
+  return new AxiosAdapter(baseUrl);
 };
