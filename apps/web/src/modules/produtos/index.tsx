@@ -46,6 +46,7 @@ export const ManterProdutos = (): JSX.Element => {
       const [, params] = queryKey;
       const result = await ProductApi.getProducts(params as object);
       pagination.totalPages = result.totalPages;
+      pagination.totalElements = result.totalElements;
 
       return result;
     },
@@ -61,6 +62,7 @@ export const ManterProdutos = (): JSX.Element => {
 
   const onClean = () => {
     form.reset();
+    setPagination(new RequestPagination());
     refetch();
   };
 
@@ -81,6 +83,7 @@ export const ManterProdutos = (): JSX.Element => {
           products={data?.content}
           pagination={pagination}
           onPaginate={onPaginate}
+          refetch={refetch}
         />
       </section>
     </ProductForm>

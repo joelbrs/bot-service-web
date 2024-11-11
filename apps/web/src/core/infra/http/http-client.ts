@@ -3,4 +3,5 @@ export interface HttpClient {
   post<T>(url: string, body?: object): Promise<T>;
   put<T>(url: string, body?: object): Promise<T>;
   patch<T>(url: string, body?: object): Promise<T>;
+  delete(url: string): Promise<void>;
 }

@@ -11,21 +11,30 @@ import { ProductDtoOut, RequestPagination } from "../../../shared/models";
 import { PaginationComponent, TooltipContainer } from "../../../shared/components";
 import { Pencil, Trash } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { DialogConfirm } from "../../../shared/components/dialog-confirm";
+import { ProductApi } from "../../../core/services";
+import { useMutation } from "@tanstack/react-query";
 
 type Props = {
   products?: ProductDtoOut[];
   pagination: RequestPagination;
   onPaginate: (page: number) => void;
+  refetch: () => void;
 };
 
-export const ProductsTable = ({ products, pagination, onPaginate }: Props): JSX.Element => {
+export const ProductsTable = ({ products, pagination, onPaginate, refetch }: Props): JSX.Element => {
   const navigate = useNavigate()
 
   const onEdit = ({ id }: ProductDtoOut) => {
     navigate(`/produtos/editar/${id}`, { state: { id } })
   }
 
-  const onExclude = () => { }
+  const { isPending, mutate: onExclude } = useMutation({
+    mutationKey: ["deleteProduct"],
+    mutationFn: async ({ id }: ProductDtoOut) => {
+      await ProductApi.deleteProduct(id);
+    }
+  })
 
   return (
     <>
@@ -60,9 +69,11 @@ export const ProductsTable = ({ products, pagination, onPaginate }: Props): JSX.
                     </Button>
                   </TooltipContainer>
                   <TooltipContainer label="Excluir">
-                    <Button size="icon" variant="ghost" onClick={onExclude}>
-                      <Trash className="h-4 w-4" />
-                    </Button>
+                    <DialogConfirm isLoading={isPending} onConfirm={() => onExclude({ id, name, status })} refetch={refetch} description="Tem certeza que deseja excluir esse item?">
+                      <Button size="icon" variant="ghost">
+                        <Trash className="h-4 w-4" />
+                      </Button>
+                    </DialogConfirm>
                   </TooltipContainer>
                 </TableCell>
               </TableRow>

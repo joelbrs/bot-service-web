@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Header } from "../components";
+import { Footer, Header } from "../components";
 import { Separator } from "@repo/ui/components";
 
 type Props = {
@@ -19,7 +19,7 @@ export const Page = ({ title, description }: Props): JSX.Element => {
         <Outlet />
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

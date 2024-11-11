@@ -53,4 +53,8 @@ export class AxiosAdapter extends HttpHandler implements HttpClient {
     const { data } = await this._client.patch<T>(this.constructUrl(url), body);
     return data;
   }
+
+  async delete(url: string): Promise<void> {
+    await this._client.delete(this.constructUrl(url));
+  }
 }
