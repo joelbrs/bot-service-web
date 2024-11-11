@@ -1,1 +1,2 @@
 export * as ProductApi from './products'
+export * as TemplateApi from './templates'

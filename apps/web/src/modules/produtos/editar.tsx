@@ -62,10 +62,10 @@ export const EditarProduto = (): JSX.Element => {
             return navigate("/produtos");
         }
 
-        const data = await ProductApi.getProductById(idenfifier);
-        form.setValue("name", data.name);
-        form.setValue("status", data.status);
-        setSubProducts(data.subProducts);
+        const { name, status, subProducts } = await ProductApi.getProductById(idenfifier);
+        form.setValue("name", name);
+        form.setValue("status", status);
+        setSubProducts(subProducts);
     }
 
     const onAddSubProduct = ({ name, price }: SubProductDtoOut) => {
