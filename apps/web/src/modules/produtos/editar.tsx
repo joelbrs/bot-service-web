@@ -5,7 +5,7 @@ import { BtnSave } from "../../shared/components";
 import { SubProductsTable } from "./components";
 import { ProductForm, SubProductForm } from "./containers";
 import { useState } from "react";
-import { SubProductDtoOut } from "../../shared/models";
+import { ProductStatus, SubProductDtoOut } from "../../shared/models";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ProductApi } from "../../core/services";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ type SubProductSchemaType = z.infer<typeof schemaSubProduct>;
 
 const schema = z.object({
     name: z.string().min(3),
-    status: z.enum(["DISPONIVEL", "INDISPONIVEL"]).default("DISPONIVEL"),
+    status: z.enum(ProductStatus.values()).default(ProductStatus.DISPONIVEL),
 });
 
 const schemaSubProduct = z.object({
@@ -30,7 +30,7 @@ export const EditarProduto = (): JSX.Element => {
         resolver: zodResolver(schema),
         defaultValues: {
             name: "",
-            status: "DISPONIVEL",
+            status: ProductStatus.DISPONIVEL,
         },
     });
 

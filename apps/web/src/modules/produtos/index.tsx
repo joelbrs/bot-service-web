@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ProductDtoOut,
+  ProductStatus,
   RequestPagination,
   ResponsePagination,
 } from "../../shared/models";
@@ -18,7 +19,7 @@ type SchemaType = z.infer<typeof schema>;
 
 const schema = z.object({
   name: z.string(),
-  status: z.enum(["DISPONIVEL", "INDISPONIVEL"]),
+  status: z.enum(ProductStatus.values()).default(ProductStatus.DISPONIVEL),
 });
 
 export const ManterProdutos = (): JSX.Element => {
@@ -26,7 +27,7 @@ export const ManterProdutos = (): JSX.Element => {
     resolver: zodResolver(schema),
     defaultValues: {
       name: "",
-      status: "DISPONIVEL",
+      status: ProductStatus.DISPONIVEL,
     },
   });
 
