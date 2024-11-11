@@ -7,6 +7,7 @@ export interface TemplateDtoOut {
   id: string;
   name: string;
   status: string;
+  content: string
 }
 
 // eslint-disable-next-line @typescript-eslint/no-namespace

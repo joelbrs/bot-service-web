@@ -9,6 +9,7 @@ import { CadastrarProduto } from "./modules/produtos/cadastrar";
 import { EditarProduto } from "./modules/produtos/editar";
 import { ManterTemplate } from "./modules/templates";
 import { CadastrarTemplate } from "./modules/templates/cadastrar";
+import { EditarTemplate } from "./modules/templates/editar";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +73,16 @@ export const router = createBrowserRouter([
       {
         path: '/template/cadastrar',
         element: <CadastrarTemplate />
+      }
+    ]
+  },
+  {
+    path: '/',
+    element: <Page title="Editar Template" />,
+    children: [
+      {
+        path: '/template/editar/:id',
+        element: <EditarTemplate />
       }
     ]
   },

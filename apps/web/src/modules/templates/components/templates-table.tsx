@@ -22,7 +22,7 @@ export const TemplatesTable = ({ templates, pagination, onPaginate }: Props): JS
     const navigate = useNavigate()
 
     const onEdit = ({ id }: TemplateDtoOut) => {
-        navigate(`/templates/editar/${id}`, { state: { id } })
+        navigate(`/template/editar/${id}`, { state: { id } })
     }
 
     const onExclude = () => { }
