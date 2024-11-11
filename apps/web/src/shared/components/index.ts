@@ -12,5 +12,6 @@ export * from './header'
 export * from './loading'
 export * from './pagination'
 export * from './theme-toggle'
+export * from './tooltip-container'
 
 export * from "./providers";

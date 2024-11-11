@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import { AuthPageLayout } from "./layouts/auth";
-import { PasswordSignInPage } from "./pages/sign-in";
-import { SignUpPage } from "./pages/sign-up";
-import { NotFoundPage } from "./pages/not-found";
-import { ManterProdutos } from "./pages/produtos";
-import { Page } from "./layouts/page";
-import { CadastrarProduto } from "./pages/produtos/cadastrar";
+import { AuthPageLayout } from "./shared/layouts/auth";
+import { PasswordSignInPage } from "./modules/sign-in";
+import { SignUpPage } from "./modules/sign-up";
+import { NotFoundPage } from "./modules/not-found";
+import { ManterProdutos } from "./modules/produtos";
+import { Page } from "./shared/layouts/page";
+import { CadastrarProduto } from "./modules/produtos/cadastrar";
+import { EditarProduto } from "./modules/produtos/editar";
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +25,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <Page title="Manter Produtos"/>,
+    element: <Page title="Manter Produtos" />,
     children: [
       {
         path: '/produtos',
@@ -34,11 +35,21 @@ export const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <Page title="Novo Produto"/>,
+    element: <Page title="Novo Produto" />,
     children: [
       {
         path: '/produtos/cadastrar',
         element: <CadastrarProduto />
+      }
+    ]
+  },
+  {
+    path: '/',
+    element: <Page title="Editar Produto" />,
+    children: [
+      {
+        path: '/produtos/editar/:id',
+        element: <EditarProduto />
       }
     ]
   },

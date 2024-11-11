@@ -1,6 +1,7 @@
 import type { AxiosInstance, CreateAxiosDefaults } from "axios";
 import { HttpClient } from "../http-client";
 import axios from "axios";
+import { HttpHandler } from "../http-handler";
 
 const config: CreateAxiosDefaults = {
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -28,26 +29,28 @@ $axios.interceptors.response.use(
   }
 );
 
-export class AxiosAdapter implements HttpClient {
+export class AxiosAdapter extends HttpHandler implements HttpClient {
   private _client: AxiosInstance = $axios;
 
   async get<T>(url: string, params?: object) {
-    const { data } = await this._client.get<T>(url, { params });
+    const { data } = await this._client.get<T>(this.constructUrl(url), {
+      params,
+    });
     return data;
   }
 
   async post<T>(url: string, body?: object): Promise<T> {
-    const { data } = await this._client.post<T>(url, body);
+    const { data } = await this._client.post<T>(this.constructUrl(url), body);
     return data;
   }
 
   async put<T>(url: string, body?: object): Promise<T> {
-    const { data } = await this._client.put<T>(url, body);
+    const { data } = await this._client.put<T>(this.constructUrl(url), body);
     return data;
   }
 
   async patch<T>(url: string, body?: object): Promise<T> {
-    const { data } = await this._client.patch<T>(url, body);
+    const { data } = await this._client.patch<T>(this.constructUrl(url), body);
     return data;
   }
 }

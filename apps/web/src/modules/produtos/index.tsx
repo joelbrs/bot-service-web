@@ -3,14 +3,16 @@ import {
   ProductDtoOut,
   RequestPagination,
   ResponsePagination,
-} from "../../models";
+} from "../../shared/models";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { BtnClean, BtnSearch, BtnNew } from "../../components";
-import { ProductsTable, ProductForm } from "./components";
+import { BtnClean, BtnSearch, BtnNew } from "../../shared/components";
+import { ProductsTable } from "./components";
+import { ProductForm } from "./containers";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ProductApi } from "../../services";
+import { ProductApi } from "../../core/services";
+import { useNavigate } from "react-router-dom";
 
 type SchemaType = z.infer<typeof schema>;
 
@@ -27,6 +29,8 @@ export const ManterProdutos = (): JSX.Element => {
       status: "DISPONIVEL",
     },
   });
+
+  const navigate = useNavigate()
 
   const [pagination, setPagination] = useState<RequestPagination>(
     new RequestPagination()
@@ -46,6 +50,10 @@ export const ManterProdutos = (): JSX.Element => {
     },
   });
 
+  const onNewProduct = () => {
+    navigate('/produtos/cadastrar')
+  }
+
   const onSubmit = () => {
     refetch();
   };
@@ -63,9 +71,9 @@ export const ManterProdutos = (): JSX.Element => {
   return (
     <ProductForm form={form}>
       <section className="flex justify-end gap-2">
-        <BtnClean onClick={() => onClean()} />
-        <BtnSearch onClick={() => onSubmit()} />
-        <BtnNew onClick={() => onSubmit()} label="Novo Produto" />
+        <BtnClean onClick={onClean} />
+        <BtnSearch onClick={onSubmit} />
+        <BtnNew onClick={onNewProduct} label="Novo Produto" />
       </section>
       <section>
         <ProductsTable

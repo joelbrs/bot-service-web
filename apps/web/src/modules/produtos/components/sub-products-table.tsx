@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@repo/ui/components";
-import { SubProductDtoOut } from "../../../models";
+import { SubProductDtoOut } from "../../../shared/models";
 
 type Props = {
   subProducts: SubProductDtoOut[];

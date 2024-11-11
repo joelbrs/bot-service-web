@@ -9,8 +9,8 @@ import {
   Label,
 } from "@repo/ui/components";
 import { Link } from "react-router-dom";
-import { BtnLoading, InputPassword } from "../../components";
-import { z } from "../../utils";
+import { BtnLoading, InputPassword } from "../../shared/components";
+import { z } from "../../shared/utils";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
