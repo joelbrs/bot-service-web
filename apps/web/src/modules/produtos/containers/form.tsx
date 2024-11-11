@@ -14,8 +14,8 @@ import {
 } from "@repo/ui/components";
 import { ReactNode } from "react";
 import { UseFormReturn } from "react-hook-form";
-import { InputMoney, BtnNew } from "../../../components";
-import { SubProductDtoOut } from "../../../models";
+import { InputMoney, BtnNew } from "../../../shared/components";
+import { SubProductDtoOut } from "../../../shared/models";
 
 type ProductFormProps = {
   form: UseFormReturn<

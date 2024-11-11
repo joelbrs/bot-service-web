@@ -1,12 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { BtnClean, BtnSave } from "../../components";
-import { ProductForm, SubProductForm, SubProductsTable } from "./components";
+import { BtnClean, BtnSave } from "../../shared/components";
+import { SubProductsTable } from "./components";
+import { ProductForm, SubProductForm } from "./containers";
 import { useState } from "react";
-import { SubProductDtoOut } from "../../models";
+import { SubProductDtoOut } from "../../shared/models";
 import { useMutation } from "@tanstack/react-query";
-import { ProductApi } from "../../services";
+import { ProductApi } from "../../core/services";
 
 type SchemaType = z.infer<typeof schema>;
 type SubProductSchemaType = z.infer<typeof schemaSubProduct>;

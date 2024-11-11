@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
-import { LoadingSpinner, ThemeProvider } from "./components";
+import { LoadingSpinner, ThemeProvider } from "./shared/components";
 import { Toaster } from "@repo/ui/components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 

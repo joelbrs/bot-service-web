@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import { AuthPageLayout } from "./layouts/auth";
-import { PasswordSignInPage } from "./pages/sign-in";
-import { SignUpPage } from "./pages/sign-up";
-import { NotFoundPage } from "./pages/not-found";
-import { ManterProdutos } from "./pages/produtos";
-import { Page } from "./layouts/page";
-import { CadastrarProduto } from "./pages/produtos/cadastrar";
+import { AuthPageLayout } from "./shared/layouts/auth";
+import { PasswordSignInPage } from "./modules/sign-in";
+import { SignUpPage } from "./modules/sign-up";
+import { NotFoundPage } from "./modules/not-found";
+import { ManterProdutos } from "./modules/produtos";
+import { Page } from "./shared/layouts/page";
+import { CadastrarProduto } from "./modules/produtos/cadastrar";
 
 export const router = createBrowserRouter([
   {

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpFactory } from "../factories";
-import { ProductDtoOut, ResponsePagination } from "../models";
+import { ProductDtoOut, ResponsePagination } from "../../shared/models";
 
 const baseUrl = "/products";
 const http = HttpFactory(baseUrl);

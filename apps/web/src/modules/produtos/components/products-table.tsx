@@ -6,8 +6,8 @@ import {
   TableHeader,
   TableRow,
 } from "@repo/ui/components";
-import { ProductDtoOut, RequestPagination } from "../../../models";
-import { PaginationComponent } from "../../../components";
+import { ProductDtoOut, RequestPagination } from "../../../shared/models";
+import { PaginationComponent } from "../../../shared/components";
 
 type Props = {
   products?: ProductDtoOut[];

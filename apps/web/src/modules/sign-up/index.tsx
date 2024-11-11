@@ -9,7 +9,7 @@ import {
   Label,
 } from "@repo/ui/components";
 import { Link } from "react-router-dom";
-import { BtnLoading, InputPassword } from "../../components";
+import { BtnLoading, InputPassword } from "../../shared/components";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

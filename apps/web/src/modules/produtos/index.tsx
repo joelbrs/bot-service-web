@@ -3,14 +3,15 @@ import {
   ProductDtoOut,
   RequestPagination,
   ResponsePagination,
-} from "../../models";
+} from "../../shared/models";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { BtnClean, BtnSearch, BtnNew } from "../../components";
-import { ProductsTable, ProductForm } from "./components";
+import { BtnClean, BtnSearch, BtnNew } from "../../shared/components";
+import { ProductsTable } from "./components";
+import { ProductForm } from "./containers";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ProductApi } from "../../services";
+import { ProductApi } from "../../core/services";
 
 type SchemaType = z.infer<typeof schema>;
 
