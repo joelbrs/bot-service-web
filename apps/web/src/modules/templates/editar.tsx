@@ -7,6 +7,7 @@ import { TemplateApi } from "../../core/services";
 import { TemplateStatus } from "../../shared/models";
 import { TemplateFormContent } from "./containers";
 import { useLocation, useNavigate } from "react-router-dom";
+import { BtnBack } from "../../shared/components/btn-back";
 
 type SchemaType = z.infer<typeof schema>;
 
@@ -61,7 +62,9 @@ export const EditarTemplate = (): JSX.Element => {
 
     return (
         <TemplateFormContent form={form}>
-            <section className="flex justify-end gap-2 mt-2">
+            <section className="flex justify-between mt-2">
+                <BtnBack />
+
                 <BtnSave onClick={form.handleSubmit(() => onSubmit())} />
             </section>
         </TemplateFormContent>

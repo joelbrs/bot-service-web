@@ -7,6 +7,7 @@ import { TemplateApi } from "../../core/services";
 import { TemplateStatus } from "../../shared/models";
 import { TemplateFormContent } from "./containers";
 import { useNavigate } from "react-router-dom";
+import { BtnBack } from "../../shared/components/btn-back";
 
 type SchemaType = z.infer<typeof schema>;
 
@@ -46,9 +47,13 @@ export const CadastrarTemplate = (): JSX.Element => {
 
     return (
         <TemplateFormContent form={form}>
-            <section className="flex justify-end gap-2 mt-2">
-                <BtnClean onClick={() => onClean()} />
-                <BtnSave onClick={form.handleSubmit(() => onSubmit())} />
+            <section className="flex justify-between mt-2">
+                <BtnBack />
+
+                <div className="flex gap-2">
+                    <BtnClean onClick={() => onClean()} />
+                    <BtnSave onClick={form.handleSubmit(() => onSubmit())} />
+                </div>
             </section>
         </TemplateFormContent>
     );

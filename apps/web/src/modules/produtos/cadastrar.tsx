@@ -9,6 +9,7 @@ import { ProductStatus, SubProductDtoOut } from "../../shared/models";
 import { useMutation } from "@tanstack/react-query";
 import { ProductApi } from "../../core/services";
 import { useNavigate } from "react-router-dom";
+import { BtnBack } from "../../shared/components/btn-back";
 
 type SchemaType = z.infer<typeof schema>;
 type SubProductSchemaType = z.infer<typeof schemaSubProduct>;
@@ -79,9 +80,13 @@ export const CadastrarProduto = (): JSX.Element => {
         </SubProductForm>
       </section>
 
-      <section className="flex justify-end gap-2">
-        <BtnClean onClick={() => onClean()} />
-        <BtnSave onClick={form.handleSubmit(() => onSubmit())} />
+      <section className="flex justify-between">
+        <BtnBack />
+
+        <div className="flex gap-2">
+          <BtnClean onClick={() => onClean()} />
+          <BtnSave onClick={form.handleSubmit(() => onSubmit())} />
+        </div>
       </section>
     </ProductForm>
   );

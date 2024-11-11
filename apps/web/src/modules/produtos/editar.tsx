@@ -9,6 +9,7 @@ import { ProductStatus, SubProductDtoOut } from "../../shared/models";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ProductApi } from "../../core/services";
 import { useLocation, useNavigate } from "react-router-dom";
+import { BtnBack } from "../../shared/components/btn-back";
 
 type SchemaType = z.infer<typeof schema>;
 type SubProductSchemaType = z.infer<typeof schemaSubProduct>;
@@ -93,7 +94,8 @@ export const EditarProduto = (): JSX.Element => {
                 </SubProductForm>
             </section>
 
-            <section className="flex justify-end gap-2">
+            <section className="flex justify-between">
+                <BtnBack />
                 <BtnSave onClick={form.handleSubmit(() => onSubmit())} />
             </section>
         </ProductForm>
