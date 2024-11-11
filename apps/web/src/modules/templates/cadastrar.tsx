@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { TemplateApi } from "../../core/services";
 import { TemplateStatus } from "../../shared/models";
 import { TemplateFormContent } from "./containers";
+import { useNavigate } from "react-router-dom";
 
 type SchemaType = z.infer<typeof schema>;
 
@@ -32,8 +33,11 @@ export const CadastrarTemplate = (): JSX.Element => {
         },
     });
 
+    const navigate = useNavigate()
+
     const onSubmit = () => {
         mutate();
+        navigate("/template");
     };
 
     const onClean = () => {

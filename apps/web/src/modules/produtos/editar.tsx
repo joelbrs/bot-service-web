@@ -75,6 +75,7 @@ export const EditarProduto = (): JSX.Element => {
 
     const onSubmit = () => {
         mutate();
+        navigate("/produtos")
     };
 
 

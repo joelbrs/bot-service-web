@@ -8,6 +8,7 @@ import { useState } from "react";
 import { ProductStatus, SubProductDtoOut } from "../../shared/models";
 import { useMutation } from "@tanstack/react-query";
 import { ProductApi } from "../../core/services";
+import { useNavigate } from "react-router-dom";
 
 type SchemaType = z.infer<typeof schema>;
 type SubProductSchemaType = z.infer<typeof schemaSubProduct>;
@@ -41,6 +42,8 @@ export const CadastrarProduto = (): JSX.Element => {
     },
   });
 
+  const navigate = useNavigate()
+
   const { mutate } = useMutation({
     mutationFn: async () => {
       const { name, status } = form.getValues();
@@ -58,6 +61,7 @@ export const CadastrarProduto = (): JSX.Element => {
 
   const onSubmit = () => {
     mutate();
+    navigate("/produtos")
   };
 
   const onClean = () => {

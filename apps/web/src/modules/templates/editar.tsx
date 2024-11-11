@@ -51,6 +51,7 @@ export const EditarTemplate = (): JSX.Element => {
 
     const onSubmit = () => {
         mutate();
+        navigate("/template");
     };
 
     useQuery({
