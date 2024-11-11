@@ -52,7 +52,7 @@ export const ManterTemplate = (): JSX.Element => {
     });
 
     const onNewProduct = () => {
-        navigate('/templates/cadastrar')
+        navigate('/template/cadastrar')
     }
 
     const onSubmit = () => {

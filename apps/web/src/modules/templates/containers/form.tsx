@@ -11,28 +11,34 @@ import {
     Form,
     Label,
     FormMessage,
+    Textarea,
 } from "@repo/ui/components";
 import { ReactNode } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { TemplateStatus } from "../../../shared/models";
 
-type TemplateFormProps = {
+type FormBaseProps = {
     form: UseFormReturn<
         {
             name: string;
             status: string;
+            content?: string
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         any,
         undefined
     >;
-    children: ReactNode;
-};
+    children?: ReactNode;
+}
 
-export const TemplateForm = ({ children, form }: TemplateFormProps) => {
+type TemplateFormProps = {
+    children: ReactNode;
+} & FormBaseProps;
+
+const FormBase = ({ children, form }: FormBaseProps) => {
     return (
-        <main className="space-y-2">
-            <p className="text-muted-foreground">Dados do Produto</p>
+        <>
+            <p className="text-muted-foreground">Dados do Template</p>
             <Form {...form}>
                 <form className="sm:grid sm:grid-cols-12 sm:gap-2 space-y-2 sm:space-y-0">
                     <section className="sm:col-span-10">
@@ -76,10 +82,50 @@ export const TemplateForm = ({ children, form }: TemplateFormProps) => {
                             )}
                         />
                     </section>
+                    {children}
                 </form>
             </Form>
+        </>
+    )
+}
+
+const FormContent = ({ form }: FormBaseProps) => {
+    return (
+        <section className="sm:col-span-12">
+            <FormField
+                control={form.control}
+                name="content"
+                render={({ field }) => (
+                    <FormItem>
+                        <Label htmlFor="content">Conteúdo do Template</Label>
+                        <FormControl>
+                            <Textarea id="content" placeholder="Conteúdo do Template" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                )}
+            />
+        </section>
+    )
+}
+
+export const TemplateForm = ({ children, form }: TemplateFormProps) => {
+    return (
+        <main className="space-y-2">
+            {FormBase({ form })}
 
             {children}
         </main>
     );
 };
+
+export const TemplateFormContent = ({ children, form }: TemplateFormProps) => {
+    const child = FormContent({ form });
+
+    return (
+        <>
+            {FormBase({ form, children: child })}
+            {children}
+        </>
+    );
+}

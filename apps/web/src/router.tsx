@@ -8,6 +8,7 @@ import { Page } from "./shared/layouts/page";
 import { CadastrarProduto } from "./modules/produtos/cadastrar";
 import { EditarProduto } from "./modules/produtos/editar";
 import { ManterTemplate } from "./modules/templates";
+import { CadastrarTemplate } from "./modules/templates/cadastrar";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +62,16 @@ export const router = createBrowserRouter([
       {
         path: '/template',
         element: <ManterTemplate />
+      }
+    ]
+  },
+  {
+    path: '/',
+    element: <Page title="Novo Template" />,
+    children: [
+      {
+        path: '/template/cadastrar',
+        element: <CadastrarTemplate />
       }
     ]
   },

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Header, Footer } from "../components";
+import { Header } from "../components";
 
 type Props = {
   title: string;
@@ -17,7 +17,7 @@ export const Page = ({ title, description }: Props): JSX.Element => {
         <Outlet />
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
