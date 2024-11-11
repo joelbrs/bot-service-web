@@ -11,21 +11,30 @@ import { RequestPagination, TemplateDtoOut } from "../../../shared/models";
 import { PaginationComponent, TooltipContainer } from "../../../shared/components";
 import { Pencil, Trash } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { DialogConfirm } from "../../../shared/components/dialog-confirm";
+import { useMutation } from "@tanstack/react-query";
+import { TemplateApi } from "../../../core/services";
 
 type Props = {
     templates?: TemplateDtoOut[];
     pagination: RequestPagination;
     onPaginate: (page: number) => void;
+    refetch: () => void;
 };
 
-export const TemplatesTable = ({ templates, pagination, onPaginate }: Props): JSX.Element => {
+export const TemplatesTable = ({ templates, pagination, onPaginate, refetch }: Props): JSX.Element => {
     const navigate = useNavigate()
 
     const onEdit = ({ id }: TemplateDtoOut) => {
         navigate(`/template/editar/${id}`, { state: { id } })
     }
 
-    const onExclude = () => { }
+    const { isPending, mutate: onExclude } = useMutation({
+        mutationKey: ["deleteProduct"],
+        mutationFn: async ({ id }: TemplateDtoOut) => {
+            await TemplateApi.deleteTemplate(id);
+        }
+    })
 
     return (
         <>
@@ -45,7 +54,7 @@ export const TemplatesTable = ({ templates, pagination, onPaginate }: Props): JS
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {templates?.map(({ id, name, status }) => (
+                        {templates?.map(({ id, name, status, content }) => (
                             <TableRow key={id}>
                                 <TableCell className="text-center font-medium">
                                     {name}
@@ -55,14 +64,16 @@ export const TemplatesTable = ({ templates, pagination, onPaginate }: Props): JS
                                 </TableCell>
                                 <TableCell className="text-center font-medium">
                                     <TooltipContainer label="Editar">
-                                        <Button size="icon" variant="ghost" onClick={() => onEdit({ id, name, status })}>
+                                        <Button size="icon" variant="ghost" onClick={() => onEdit({ id, name, status, content })}>
                                             <Pencil className="h-4 w-4" />
                                         </Button>
                                     </TooltipContainer>
                                     <TooltipContainer label="Excluir">
-                                        <Button size="icon" variant="ghost" onClick={onExclude}>
-                                            <Trash className="h-4 w-4" />
-                                        </Button>
+                                        <DialogConfirm isLoading={isPending} onConfirm={() => onExclude({ id, name, status, content })} refetch={refetch} description="Tem certeza que deseja excluir esse item?">
+                                            <Button size="icon" variant="ghost">
+                                                <Trash className="h-4 w-4" />
+                                            </Button>
+                                        </DialogConfirm>
                                     </TooltipContainer>
                                 </TableCell>
                             </TableRow>
@@ -76,7 +87,7 @@ export const TemplatesTable = ({ templates, pagination, onPaginate }: Props): JS
                         )}
                     </TableBody>
                 </Table>
-            </section>
+            </section >
             <section className="mt-2">
                 <PaginationComponent pagination={pagination} onPaginate={onPaginate} />
             </section>

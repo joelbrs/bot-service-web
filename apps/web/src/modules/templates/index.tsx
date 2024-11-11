@@ -81,6 +81,7 @@ export const ManterTemplate = (): JSX.Element => {
                     templates={data?.content}
                     pagination={pagination}
                     onPaginate={onPaginate}
+                    refetch={refetch}
                 />
             </section>
         </TemplateForm>

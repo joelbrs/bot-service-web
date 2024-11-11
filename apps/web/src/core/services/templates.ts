@@ -19,3 +19,7 @@ export const postTemplate = (params: object) => {
 export const putTemplate = (id: string, params: object) => {
   return http.put<TemplateDtoOut>(`${id}`, params);
 }
+
+export const deleteTemplate = (id: string) => {
+  return http.delete(`${id}`);
+}
