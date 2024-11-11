@@ -12,9 +12,9 @@ export const Page = ({ title, description }: Props): JSX.Element => {
     <>
       <Header />
       <div className="sm:px-10 px-5">
-        <h1 className="text-3xl font-bold mt-5">{title}</h1>
+        <h1 className="text-3xl font-bold mt-8">{title}</h1>
         <p className="text-sm text-muted-foreground">{description}</p>
-        <Separator className="mb-5 mt-2" />
+        <Separator className="mb-5 mt-3" />
 
         <Outlet />
       </div>
