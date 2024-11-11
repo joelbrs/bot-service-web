@@ -9,7 +9,6 @@ export class HttpHandler {
   private constructUrl(url: string) {
     if (this._baseUrl) {
       if (url.length) {
-        url = url.startsWith("/") ? url : `/${url}`;
         return `${this._baseUrl}/${url}`;
       }
       return this._baseUrl

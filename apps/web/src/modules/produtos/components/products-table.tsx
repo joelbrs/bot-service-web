@@ -21,8 +21,8 @@ type Props = {
 export const ProductsTable = ({ products, pagination, onPaginate }: Props): JSX.Element => {
   const navigate = useNavigate()
 
-  const onEdit = () => {
-    navigate('/produtos/editar')
+  const onEdit = ({ id }: ProductDtoOut) => {
+    navigate(`/produtos/editar/${id}`, { state: { id } })
   }
 
   const onExclude = () => { }
@@ -55,7 +55,7 @@ export const ProductsTable = ({ products, pagination, onPaginate }: Props): JSX.
                 </TableCell>
                 <TableCell className="text-center font-medium">
                   <TooltipContainer label="Editar">
-                    <Button size="icon" variant="ghost" onClick={onEdit}>
+                    <Button size="icon" variant="ghost" onClick={() => onEdit({ id, name, status })}>
                       <Pencil className="h-4 w-4" />
                     </Button>
                   </TooltipContainer>
