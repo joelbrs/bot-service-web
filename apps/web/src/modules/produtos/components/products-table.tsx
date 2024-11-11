@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { DialogConfirm } from "../../../shared/components/dialog-confirm";
 import { ProductApi } from "../../../core/services";
 import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 
 type Props = {
   products?: ProductDtoOut[];
@@ -23,6 +24,7 @@ type Props = {
 };
 
 export const ProductsTable = ({ products, pagination, onPaginate, refetch }: Props): JSX.Element => {
+  const [open, setOpen] = useState<boolean>(false);
   const navigate = useNavigate()
 
   const onEdit = ({ id }: ProductDtoOut) => {
@@ -69,7 +71,7 @@ export const ProductsTable = ({ products, pagination, onPaginate, refetch }: Pro
                     </Button>
                   </TooltipContainer>
                   <TooltipContainer label="Excluir">
-                    <DialogConfirm isLoading={isPending} onConfirm={() => onExclude({ id, name, status })} refetch={refetch} description="Tem certeza que deseja excluir esse item?">
+                    <DialogConfirm open={open} setOpen={setOpen} isLoading={isPending} onConfirm={() => onExclude({ id, name, status })} refetch={refetch} description="Tem certeza que deseja excluir esse item?">
                       <Button size="icon" variant="ghost">
                         <Trash className="h-4 w-4" />
                       </Button>

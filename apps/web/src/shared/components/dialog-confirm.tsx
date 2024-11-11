@@ -10,14 +10,16 @@ import {
     DialogClose,
 } from "@repo/ui/components";
 import { Loader2 } from "lucide-react";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 
 type Props = {
     description: string;
-    children: ReactNode;
+    children?: ReactNode;
     onConfirm: () => void;
     isLoading: boolean
     refetch?: () => void
+    open: boolean
+    setOpen: (value: boolean) => void
 };
 
 export function DialogConfirm({
@@ -25,10 +27,10 @@ export function DialogConfirm({
     onConfirm,
     children,
     isLoading,
-    refetch
+    refetch,
+    open,
+    setOpen
 }: Props): JSX.Element {
-    const [open, setOpen] = useState<boolean>(false)
-
     return (
         <Dialog open={open}>
             <DialogTrigger onClick={() => setOpen(true)} asChild>{children}</DialogTrigger>

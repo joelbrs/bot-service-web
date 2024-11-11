@@ -8,6 +8,8 @@ import { TemplateStatus } from "../../shared/models";
 import { TemplateFormContent } from "./containers";
 import { useNavigate } from "react-router-dom";
 import { BtnBack } from "../../shared/components/btn-back";
+import { DialogConfirm } from "../../shared/components/dialog-confirm";
+import { useState } from "react";
 
 type SchemaType = z.infer<typeof schema>;
 
@@ -26,7 +28,7 @@ export const CadastrarTemplate = (): JSX.Element => {
         },
     });
 
-    const { mutate } = useMutation({
+    const { mutate, isPending } = useMutation({
         mutationFn: async () => {
             const { name, status, content } = form.getValues();
 
@@ -34,7 +36,17 @@ export const CadastrarTemplate = (): JSX.Element => {
         },
     });
 
+    const [open, setOpen] = useState<boolean>(false)
     const navigate = useNavigate()
+
+    const onVerify = () => {
+        const { status } = form.getValues();
+
+        if (status === TemplateStatus.ATIVO) {
+            return setOpen(true);
+        }
+        onSubmit();
+    }
 
     const onSubmit = () => {
         mutate();
@@ -47,12 +59,14 @@ export const CadastrarTemplate = (): JSX.Element => {
 
     return (
         <TemplateFormContent form={form}>
+            <DialogConfirm open={open} setOpen={setOpen} description="Ao criar um template com o status ATIVO, este será o que será retornado aos usuários." onConfirm={onSubmit} isLoading={isPending} />
+
             <section className="flex justify-between mt-2">
                 <BtnBack />
 
                 <div className="flex gap-2">
                     <BtnClean onClick={() => onClean()} />
-                    <BtnSave onClick={form.handleSubmit(() => onSubmit())} />
+                    <BtnSave onClick={form.handleSubmit(() => onVerify())} />
                 </div>
             </section>
         </TemplateFormContent>

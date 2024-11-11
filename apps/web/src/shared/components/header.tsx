@@ -1,7 +1,6 @@
 import { Separator } from "@repo/ui/components";
 import { BotMessageSquare } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { ModeToggle } from "./theme-toggle";
 import { BtnUser } from "./btn-user";
 
 export function Header(): JSX.Element {
@@ -40,7 +39,7 @@ export function Header(): JSX.Element {
       </div>
 
       <div className="flex items-center gap-2">
-        <ModeToggle />
+        {/* <ModeToggle /> */}
         <BtnUser />
       </div>
     </header>
