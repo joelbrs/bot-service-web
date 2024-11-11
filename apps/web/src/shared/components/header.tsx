@@ -1,10 +1,23 @@
 import { Separator } from "@repo/ui/components";
 import { Pyramid } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ModeToggle } from "./theme-toggle";
 import { BtnUser } from "./btn-user";
 
 export function Header(): JSX.Element {
+  const { pathname } = useLocation()
+
+  const isTemplatePage = () => {
+    const [, uri] = pathname.split('/')
+    console.log(uri)
+    return uri === 'template'
+  }
+
+  const isProductPage = () => {
+    const [, uri] = pathname.split('/')
+    return uri === 'produtos'
+  }
+
   return (
     <header className="flex justify-between py-3 px-6 border-b">
       <div className="flex items-center">
@@ -14,12 +27,12 @@ export function Header(): JSX.Element {
         </div>
         <nav className="sm:px-6 px-2 text-sm font-medium flex sm:gap-3">
           <Link to={{ pathname: "/template" }}>
-            <span className="hover:underline hover:underline-offset-4 text-foreground">
+            <span className={`hover:underline hover:underline-offset-4 text-foreground ${isTemplatePage() && 'underline underline-offset-4'}`}>
               Manter Templates
             </span>
           </Link>
           <Link to={{ pathname: "/produtos" }}>
-            <span className="hover:underline hover:underline-offset-4 text-foreground">
+            <span className={`hover:underline hover:underline-offset-4 text-foreground ${isProductPage() && 'underline underline-offset-4'}`}>
               Manter Produtos
             </span>
           </Link>
@@ -28,7 +41,7 @@ export function Header(): JSX.Element {
 
       <div className="flex items-center gap-2">
         <ModeToggle />
-        <BtnUser/>
+        <BtnUser />
       </div>
     </header>
   );
