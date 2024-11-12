@@ -8,12 +8,13 @@ import {
   Input,
   Label,
 } from "@repo/ui/components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BtnLoading, InputPassword } from "../../shared/components";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { AuthApi } from "../../core/services";
 
 type SchemaType = z.infer<typeof schema>;
 
@@ -30,7 +31,7 @@ const schema = z
   });
 
 export function SignUpPage(): JSX.Element {
-  const [isLoading] = useState(false);
+  const navigate = useNavigate()
 
   const form = useForm<SchemaType>({
     resolver: zodResolver(schema),
@@ -42,7 +43,17 @@ export function SignUpPage(): JSX.Element {
     },
   });
 
-  const onSubmit = () => {};
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["sign-up"],
+    mutationFn: async () => {
+      await AuthApi.postSignUp(form.getValues());
+      navigate("/sign-in");
+    }
+  })
+
+  const onSubmit = () => {
+    mutate()
+  };
 
   return (
     <div className="lg:p-8 space-y-10">
@@ -137,7 +148,7 @@ export function SignUpPage(): JSX.Element {
             <BtnLoading
               type="submit"
               placeholder="Finalizar Cadastro"
-              isLoading={isLoading}
+              isLoading={isPending}
             />
           </form>
         </Form>

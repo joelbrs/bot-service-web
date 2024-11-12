@@ -8,33 +8,44 @@ import {
   Input,
   Label,
 } from "@repo/ui/components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BtnLoading, InputPassword } from "../../shared/components";
 import { z } from "../../shared/utils";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { AuthApi } from "../../core/services";
 
 type SchemaType = z.infer<typeof schema>;
 
 const schema = z.object({
-  taxId: z.string().min(11),
+  cpfCnpj: z.string().min(11).max(14),
   password: z.string().min(8).max(20),
 });
 
 export function PasswordSignInPage(): JSX.Element {
-  // const navigate = useNavigate();
-  const [isLoading] = useState(false);
+  const navigate = useNavigate();
 
   const form = useForm<SchemaType>({
     resolver: zodResolver(schema),
     defaultValues: {
-      taxId: "",
+      cpfCnpj: "",
       password: "",
     },
   });
 
-  const onSubmit = () => {};
+  const { mutate, isPending } = useMutation({
+    mutationKey: ['sign-in'],
+    mutationFn: async () => {
+      const data = await AuthApi.postSignIn(form.getValues());
+      navigate("/produtos");
+      return data;
+    }
+  })
+
+  const onSubmit = () => {
+    mutate();
+  };
 
   return (
     <div className="space-y-10">
@@ -59,12 +70,12 @@ export function PasswordSignInPage(): JSX.Element {
           <section className="space-y-2">
             <FormField
               control={form.control}
-              name="taxId"
+              name="cpfCnpj"
               render={({ field }) => (
                 <FormItem>
-                  <Label htmlFor="taxId">CPF/CNPJ</Label>
+                  <Label htmlFor="cpfCnpj">CPF/CNPJ</Label>
                   <FormControl>
-                    <Input id="taxId" placeholder="CPF/CNPJ" {...field} />
+                    <Input id="cpfCnpj" placeholder="CPF/CNPJ" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -89,7 +100,7 @@ export function PasswordSignInPage(): JSX.Element {
             <BtnLoading
               type="submit"
               placeholder="Acessar Painel"
-              isLoading={isLoading}
+              isLoading={isPending}
             />
           </div>
         </form>

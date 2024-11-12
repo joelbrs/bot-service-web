@@ -10,7 +10,7 @@ const config: CreateAxiosDefaults = {
     "Content-Type": "application/json",
     Accept: "application/json",
   },
-  // withCredentials: true,
+  withCredentials: true,
 };
 
 const $axios: AxiosInstance = axios.create(config);
