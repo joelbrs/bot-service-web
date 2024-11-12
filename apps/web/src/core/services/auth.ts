@@ -10,3 +10,7 @@ export const postSignIn = (params: object) => {
 export const postSignUp = (params: object) => {
     return http.post(`sign-up`, params);
 }
+
+export const postLogout = () => {
+    return http.post(`logout`);
+}
