@@ -22,6 +22,7 @@ const schema = z
   .object({
     cpfCnpj: z.string().min(11),
     name: z.string().min(3),
+    organizationIdentifier: z.string().length(14),
     password: z.string().min(8),
     passwordConfirmation: z.string().min(8),
   })
@@ -99,9 +100,23 @@ export function SignUpPage(): JSX.Element {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <Label htmlFor="name">Nome</Label>
+                  <Label htmlFor="name">Nome Completo</Label>
                   <FormControl>
-                    <Input placeholder="Nome" id="name" {...field} />
+                    <Input placeholder="Nome Completo" id="name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="organizationIdentifier"
+              render={({ field }) => (
+                <FormItem>
+                  <Label htmlFor="organizationIdentifier">CNPJ da Organização</Label>
+                  <FormControl>
+                    <Input placeholder="CNPJ da Organização" id="organizationIdentifier" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
