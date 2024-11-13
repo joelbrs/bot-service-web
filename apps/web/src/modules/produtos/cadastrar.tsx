@@ -49,7 +49,8 @@ export const CadastrarProduto = (): JSX.Element => {
     mutationFn: async () => {
       const { name, status } = form.getValues();
 
-      return await ProductApi.postProduct({ name, status, subProducts });
+      await ProductApi.postProduct({ name, status, subProducts });
+      navigate("/produtos")
     },
   });
 
@@ -62,7 +63,6 @@ export const CadastrarProduto = (): JSX.Element => {
 
   const onSubmit = () => {
     mutate();
-    navigate("/produtos")
   };
 
   const onClean = () => {

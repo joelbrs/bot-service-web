@@ -53,7 +53,8 @@ export const EditarProduto = (): JSX.Element => {
             const { id: idenfifier } = state
             const { name, status } = form.getValues();
 
-            return await ProductApi.putProduct(idenfifier, { name, status, products: subProducts });
+            await ProductApi.putProduct(idenfifier, { name, status, products: subProducts });
+            navigate("/produtos")
         },
     });
 
@@ -76,7 +77,6 @@ export const EditarProduto = (): JSX.Element => {
 
     const onSubmit = () => {
         mutate();
-        navigate("/produtos")
     };
 
 

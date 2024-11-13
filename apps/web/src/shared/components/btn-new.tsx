@@ -12,7 +12,7 @@ export const BtnNew = ({ label, onClick, type, className }: Props) => {
   return (
     <Button
       onClick={onClick}
-      className={`${className} "font-bold"`}
+      className={`${className} "font-bold bg-green-400 hover:bg-green-500 text-white`}
       type={type}
       size="sm"
     >

@@ -34,7 +34,8 @@ export const EditarTemplate = (): JSX.Element => {
             const { id: idenfifier } = state
             const { name, status, content } = form.getValues();
 
-            return await TemplateApi.putTemplate(idenfifier, { name, status, content });
+            await TemplateApi.putTemplate(idenfifier, { name, status, content });
+            navigate("/template");
         },
     });
 
@@ -52,7 +53,6 @@ export const EditarTemplate = (): JSX.Element => {
 
     const onSubmit = () => {
         mutate();
-        navigate("/template");
     };
 
     useQuery({

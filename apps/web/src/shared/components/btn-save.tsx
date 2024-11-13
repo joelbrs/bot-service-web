@@ -7,7 +7,7 @@ type Props = {
 
 export const BtnSave = ({ onClick }: Props) => {
   return (
-    <Button onClick={onClick} className="font-bold" size="sm">
+    <Button onClick={onClick} className="font-bold bg-green-400 hover:bg-green-500 text-white" size="sm">
       Salvar
       <Save className="w-5 h-5 ml-1" />
     </Button>

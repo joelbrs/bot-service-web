@@ -32,7 +32,8 @@ export const CadastrarTemplate = (): JSX.Element => {
         mutationFn: async () => {
             const { name, status, content } = form.getValues();
 
-            return await TemplateApi.postTemplate({ name, status, content });
+            await TemplateApi.postTemplate({ name, status, content });
+            navigate("/template");
         },
     });
 
@@ -50,7 +51,6 @@ export const CadastrarTemplate = (): JSX.Element => {
 
     const onSubmit = () => {
         mutate();
-        navigate("/template");
     };
 
     const onClean = () => {

@@ -20,7 +20,7 @@ export const notifyError = (e: AxiosError) => {
   }
 
   toast.warning("Atenção!", {
-    description: e.message,
+    description: e?.message,
     duration: 1500,
   });
 };
