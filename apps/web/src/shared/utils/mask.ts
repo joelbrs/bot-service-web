@@ -1,9 +1,9 @@
 export const setMaskTaskId = (input: string) => {
-  if (input.length === 11) {
+  if (input?.length === 11) {
     return input.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
   }
 
-  if (input.length === 14) {
+  if (input?.length === 14) {
     return input.replace(
       /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
       "$1.$2.$3/$4-$5"

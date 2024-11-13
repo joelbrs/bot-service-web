@@ -8,12 +8,13 @@ import {
   Input,
   Label,
 } from "@repo/ui/components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BtnLoading, InputPassword } from "../../shared/components";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { AuthApi } from "../../core/services";
 
 type SchemaType = z.infer<typeof schema>;
 
@@ -21,6 +22,7 @@ const schema = z
   .object({
     cpfCnpj: z.string().min(11),
     name: z.string().min(3),
+    organizationIdentifier: z.string().length(14),
     password: z.string().min(8),
     passwordConfirmation: z.string().min(8),
   })
@@ -30,7 +32,7 @@ const schema = z
   });
 
 export function SignUpPage(): JSX.Element {
-  const [isLoading] = useState(false);
+  const navigate = useNavigate()
 
   const form = useForm<SchemaType>({
     resolver: zodResolver(schema),
@@ -42,7 +44,17 @@ export function SignUpPage(): JSX.Element {
     },
   });
 
-  const onSubmit = () => {};
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["sign-up"],
+    mutationFn: async () => {
+      await AuthApi.postSignUp(form.getValues());
+      navigate("/sign-in");
+    }
+  })
+
+  const onSubmit = () => {
+    mutate()
+  };
 
   return (
     <div className="lg:p-8 space-y-10">
@@ -88,9 +100,23 @@ export function SignUpPage(): JSX.Element {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <Label htmlFor="name">Nome</Label>
+                  <Label htmlFor="name">Nome Completo</Label>
                   <FormControl>
-                    <Input placeholder="Nome" id="name" {...field} />
+                    <Input placeholder="Nome Completo" id="name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="organizationIdentifier"
+              render={({ field }) => (
+                <FormItem>
+                  <Label htmlFor="organizationIdentifier">CNPJ da Organização</Label>
+                  <FormControl>
+                    <Input placeholder="CNPJ da Organização" id="organizationIdentifier" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -137,7 +163,7 @@ export function SignUpPage(): JSX.Element {
             <BtnLoading
               type="submit"
               placeholder="Finalizar Cadastro"
-              isLoading={isLoading}
+              isLoading={isPending}
             />
           </form>
         </Form>

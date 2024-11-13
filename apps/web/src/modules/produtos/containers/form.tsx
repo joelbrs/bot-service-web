@@ -15,13 +15,13 @@ import {
 import { ReactNode } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { InputMoney, BtnNew } from "../../../shared/components";
-import { SubProductDtoOut } from "../../../shared/models";
+import { ProductStatus, SubProductDtoOut } from "../../../shared/models";
 
 type ProductFormProps = {
   form: UseFormReturn<
     {
       name: string;
-      status: "DISPONIVEL" | "INDISPONIVEL";
+      status: string;
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     any,
@@ -83,8 +83,8 @@ export const ProductForm = ({ children, form }: ProductFormProps) => {
                     </FormControl>
                     <FormMessage />
                     <SelectContent>
-                      <SelectItem value="DISPONIVEL">DISPONIVEL</SelectItem>
-                      <SelectItem value="INDISPONIVEL">INDISPONIVEL</SelectItem>
+                      <SelectItem value={ProductStatus.DISPONIVEL}>{ProductStatus.DISPONIVEL}</SelectItem>
+                      <SelectItem value={ProductStatus.INDISPONIVEL}>{ProductStatus.INDISPONIVEL}</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormItem>

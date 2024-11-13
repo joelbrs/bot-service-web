@@ -7,11 +7,32 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@repo/ui/components";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { ChevronDown, LogOut } from "lucide-react";
-// import { useNavigate } from "react-router-dom";
+import { AuthApi, UserApi } from "../../core/services";
+import { UserDtoOut } from "../models";
+import { setMaskTaskId } from "../utils";
+import { useNavigate } from "react-router-dom";
 
 export function BtnUser(): JSX.Element {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const { data } = useQuery<UserDtoOut>({
+    queryKey: ["account"],
+    queryFn: UserApi.getUser,
+  })
+
+  const { mutate } = useMutation({
+    mutationKey: ["logout"],
+    mutationFn: async () => {
+      await AuthApi.postLogout();
+      navigate("/sign-in");
+    }
+  })
+
+  const onLogout = () => {
+    mutate()
+  }
 
   return (
     <DropdownMenu>
@@ -21,24 +42,20 @@ export function BtnUser(): JSX.Element {
           variant="outline"
         >
           <h3 className="hidden sm:inline">
-            {/* {account?.owner.fullName} */}
+            {data?.name}
           </h3>
           <h3 className="sm:hidden">
-            {/* {account?.owner.fullName?.split(" ")[0]} */}
+            {data?.name?.split(" ")[0]}
           </h3>
           <ChevronDown className="w-4 h-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="relative right-6 w-56">
         <DropdownMenuLabel className="pb-0">
-          {/* {setMaskTaskId(account?.owner.taxId as string)} */}
+          {setMaskTaskId(data?.cpfCnpj as string)}
         </DropdownMenuLabel>
-        <p className="text-xs text-muted-foreground px-2">
-          {/* {account?.owner.email} */}
-        </p>
-
         <DropdownMenuSeparator className="mt-2" />
-        <DropdownMenuItem className="text-red-400">
+        <DropdownMenuItem onClick={onLogout} className="text-red-400">
           <LogOut className="mr-2 h-4 w-4" />
           <span>Sair</span>
         </DropdownMenuItem>

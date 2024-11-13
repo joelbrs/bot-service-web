@@ -24,3 +24,7 @@ export const postProduct = (params: object) => {
 export const putProduct = (id: string, params: object) => {
   return http.put<ProductDtoOut>(`${id}`, params);
 }
+
+export const deleteProduct = (id: string) => {
+  return http.delete(`${id}`);
+}

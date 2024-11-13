@@ -5,17 +5,18 @@ import { BtnSave } from "../../shared/components";
 import { SubProductsTable } from "./components";
 import { ProductForm, SubProductForm } from "./containers";
 import { useState } from "react";
-import { SubProductDtoOut } from "../../shared/models";
+import { ProductStatus, SubProductDtoOut } from "../../shared/models";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ProductApi } from "../../core/services";
 import { useLocation, useNavigate } from "react-router-dom";
+import { BtnBack } from "../../shared/components/btn-back";
 
 type SchemaType = z.infer<typeof schema>;
 type SubProductSchemaType = z.infer<typeof schemaSubProduct>;
 
 const schema = z.object({
     name: z.string().min(3),
-    status: z.enum(["DISPONIVEL", "INDISPONIVEL"]).default("DISPONIVEL"),
+    status: z.enum(ProductStatus.values()).default(ProductStatus.DISPONIVEL),
 });
 
 const schemaSubProduct = z.object({
@@ -30,7 +31,7 @@ export const EditarProduto = (): JSX.Element => {
         resolver: zodResolver(schema),
         defaultValues: {
             name: "",
-            status: "DISPONIVEL",
+            status: ProductStatus.DISPONIVEL,
         },
     });
 
@@ -52,7 +53,8 @@ export const EditarProduto = (): JSX.Element => {
             const { id: idenfifier } = state
             const { name, status } = form.getValues();
 
-            return await ProductApi.putProduct(idenfifier, { name, status, products: subProducts });
+            await ProductApi.putProduct(idenfifier, { name, status, products: subProducts });
+            navigate("/produtos")
         },
     });
 
@@ -62,10 +64,10 @@ export const EditarProduto = (): JSX.Element => {
             return navigate("/produtos");
         }
 
-        const data = await ProductApi.getProductById(idenfifier);
-        form.setValue("name", data.name);
-        form.setValue("status", data.status);
-        setSubProducts(data.subProducts);
+        const { name, status, subProducts } = await ProductApi.getProductById(idenfifier);
+        form.setValue("name", name);
+        form.setValue("status", status);
+        setSubProducts(subProducts);
     }
 
     const onAddSubProduct = ({ name, price }: SubProductDtoOut) => {
@@ -92,7 +94,8 @@ export const EditarProduto = (): JSX.Element => {
                 </SubProductForm>
             </section>
 
-            <section className="flex justify-end gap-2">
+            <section className="flex justify-between">
+                <BtnBack />
                 <BtnSave onClick={form.handleSubmit(() => onSubmit())} />
             </section>
         </ProductForm>

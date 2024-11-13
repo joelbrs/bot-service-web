@@ -14,3 +14,4 @@ export * from "./textarea";
 export * from './select'
 export * from './pagination'
 export * from './tooltip'
+export * from './dialog'
